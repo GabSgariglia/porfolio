@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/scripts/scripts.js" defer></script>
+    <script src="/scripts/hover.js" defer></script>
+    <link rel="stylesheet" href="/styles/style.css">
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <title>Porfolio</title>
+</head>
+
+<body x-data="app()">
+    <header class="blur">
+        <div id="app">Porfolio</div>
+        <nav class="Menu">
+            <ul>
+                <li><a class="navBtn" href="">A propos</a></li>
+                <li><a class="navBtn" href="">Realisations</a></li>
+                <li><a class="navBtn" href="">Contact</a></li>
+            </ul>
+
+        </nav>
+
+    </header>
+    <main class="blur">
+        <section class="sectionProjet">
+            <h2>Qui suis-je?</h2>
+            <p>Je suis un étudiant en intégration multimédia au cégep de matane. Depuis mon enfance je suis pasioné par la tecnologie et les jeux vidéo. Dans cette optique j'ai décider de réjoindre le CFP des riverain pour aquérir des compétence en informatique et d'optonire un DEP en soutient informatique. Durant ce parcours j'ai découvert une affinité avec le multimédia ces pour cette raison que j'ai décider de faire un technique en intégration multimédia. Au cours de mon séjour au cégep j'ai développer mais capaciter dans plusieurs dommaine plus particulierement la programmation, l'audio-visuel et en jeux vidéo.  </p>
+        </section>
+
+
+        <!-- section des réalisation -->
+        <div class="sectionProjet">
+            <button class="btn" x-on:click="showAll">Tout</button>
+            <button class="btn" x-on:click="showjeu">Jeu</button>
+            <button class="btn" x-on:click="showprog">Prog</button>
+        </div>
+        <section class="sectionProjet" x-show="startProject">
+            <div class="projetContainer">
+                <template x-for="(projet,index ) in projet">
+                    <article @click="showPopup"  class="projet">
+                        <p class="projetText"> Cliquer ici pour en savoir plus</p>
+                        <img class="projetImage" :src="projet.image" alt="">
+                    </article>
+                </template>
+            </div>
+            
+        </section>
+        <section class="sectionProjet">
+            <div class="projetContainer">
+                <template x-for="(projet,index ) in projetByCategorie">
+                    <article @click="showPopup"  class="projet">
+                        <p class="projetText"> Cliquer ici pour en savoir plus</p>
+                        <img class="projetImage" :src="projet.image" alt="">
+                    </article>
+                </template>
+            </div>
+            
+        </section>
+
+
+
+
+        <section class="sectionProjet">
+            <h2>Me contacter</h2>
+            <form action="">
+                <label for="name">Prénom et nom</label>
+                <input type="text" id="name" name="name" placeholder="Votre nom...">
+
+                <label for="courriel">Votre courriel</label>
+                <input type="email" id="courriel" name="courriel" placeholder="Votre courriel...">
+
+                <label for="message">Message</label>
+                <textarea id="message" name="message"></textarea>
+
+            </form>
+        </section>
+        
+    </main>
+    <footer>
+
+    </footer>
+
+    <!-- <article x-on:click.away="showPopup" x-show="afficherProjet" class="projetPopUp" x-transition.scale.0.duration.500ms> -->
+    <article  class="projetPopUp">
+        <template x-for="projetToshow in projetInPopUp">
+            <div x-on:click.away="showPopup" x-show="afficherProjet">
+            <h2 x-text="projetToshow.nom"></h2>
+             <p x-text="projetToshow.description"></p>
+             <p x-text="projetToshow.tache"></p>
+            </div>
+             
+        </template> 
+     </article>
+    
+</body>
+
+</html>
